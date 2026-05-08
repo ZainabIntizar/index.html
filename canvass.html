@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graphics Scene</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4e7ff;
+        }
+
+        canvas {
+            border: 2px solid #4b0082;
+        }
+    </style>
+</head>
+
+<body>
+
+<canvas id="myCanvas" width="800" height="500"></canvas>
+
+<script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#87ceeb";
+    ctx.fillRect(0, 0, 800, 500);
+
+    ctx.fillStyle = "#7cfc00";
+    ctx.fillRect(0, 300, 800, 200);
+
+    ctx.beginPath();
+    ctx.arc(120, 100, 50, 0, 2 * Math.PI);
+    ctx.fillStyle = "#ff8c00";
+    ctx.fill();
+
+    ctx.fillStyle = "#6a5acd";
+    ctx.fillRect(400, 220, 150, 120);
+
+    ctx.beginPath();
+    ctx.moveTo(400, 220);
+    ctx.lineTo(475, 150);
+    ctx.lineTo(550, 220);
+    ctx.fillStyle = "#ff1493";
+    ctx.fill();
+
+    ctx.fillStyle = "#2f4f4f";
+    ctx.fillRect(460, 270, 30, 70);
+
+    ctx.fillStyle = "#add8e6";
+    ctx.fillRect(420, 240, 30, 30);
+    ctx.fillRect(500, 240, 30, 30);
+</script>
+
+</body>
+</html>
