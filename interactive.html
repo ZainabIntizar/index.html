@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Square</title>
+
+    <style>
+        body{
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            text-align:center;
+            font-family:Arial, sans-serif;
+        }
+
+        h2{
+            color:#5b4b8a;
+            margin-top:20px;
+        }
+
+        canvas{
+            border:3px solid #7c6ee6;
+            background:#f8f9ff;
+            border-radius:12px;
+            box-shadow:0 6px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<h2>Interactive Color Changing Square</h2>
+
+<canvas id="myCanvas" width="500" height="350"></canvas>
+
+<script>
+
+let canvas = document.getElementById("myCanvas");
+let ctx = canvas.getContext("2d");
+
+let squareX = 220;
+let squareY = 140;
+let size = 60;
+
+let squareColor = "#9370db";
+
+function drawSquare() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#f8f9ff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = squareColor;
+    ctx.fillRect(squareX, squareY, size, size);
+}
+
+drawSquare();
+
+canvas.addEventListener("click", function() {
+
+    let colors = [
+        "#9370db",
+        "#6a5acd",
+        "#7b68ee",
+        "#6495ed",
+        "#5f9ea0",
+        "#4682b4"
+    ];
+
+    let randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    squareColor = randomColor;
+
+    drawSquare();
+});
+
+</script>
+
+</body>
+</html>
