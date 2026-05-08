@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drawing App</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #cce7ff, #e6ccff);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 15px;
+            color: #4b3f72;
+        }
+
+        .container {
+            background: #f8f9ff;
+            width: 720px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 2px solid #8a7dff;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .controls label {
+            font-weight: bold;
+            color: #4b3f72;
+        }
+
+        input[type="color"] {
+            border: none;
+            width: 45px;
+            height: 35px;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        input[type="range"] {
+            cursor: pointer;
+            accent-color: #6a5acd;
+        }
+
+        button {
+            padding: 8px 18px;
+            border: none;
+            background: linear-gradient(45deg, #6a5acd, #7b68ee);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #5a4fcf, #6a5acd);
+        }
+
+        canvas {
+            border: 3px solid #7b68ee;
+            border-radius: 12px;
+            cursor: crosshair;
+            background: #ffffff;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>🎨 Dream Sketch Studio</h2>
+
+<div class="container">
+
+    <div class="controls">
+        <label>Color:</label>
+        <input type="color" id="colorPicker" value="#6a5acd">
+
+        <label>Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="25" value="5">
+
+        <button onclick="clearCanvas()">Clear Canvas</button>
+    </div>
+
+    <canvas id="canvas" width="650" height="400"></canvas>
+
+</div>
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let drawing = false;
+    let color = document.getElementById("colorPicker").value;
+    let size = document.getElementById("brushSize").value;
+
+    document.getElementById("colorPicker").addEventListener("input", function() {
+        color = this.value;
+    });
+
+    document.getElementById("brushSize").addEventListener("input", function() {
+        size = this.value;
+    });
+
+    canvas.addEventListener("mousedown", (e) => {
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = size;
+        ctx.lineCap = "round";
+        ctx.stroke();
+    });
+
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mouseleave", () => drawing = false);
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
+
+</body>
+</html>
